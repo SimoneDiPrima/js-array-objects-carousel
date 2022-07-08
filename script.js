@@ -3,7 +3,9 @@
 // array di oggetti
 
 const gallery = document.querySelector(`#carousel .gallery`);
-gallery.classList.add(`main-section`);
+// gallery.classList.add(`main-section`);
+// creo la mia variabile per inserire i thumbnails
+const thumbnails = document.getElementById(`thumbnails`);
 
 const images = [
   {
@@ -17,7 +19,7 @@ const images = [
     url: 'https://static1.evcdn.net/images/reduction/1513757_w-1920_h-1080_q-70_m-crop.jpg',
     title: 'Perù',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam.',
+      'Lorem ipsum, dolor sit amet consecteturt tempore aliquid deleniti aut veniam.',
   },
 
   {
@@ -36,27 +38,25 @@ const images = [
     url: 'https://cdn.sanity.io/images/24oxpx4s/prod/ed09eff0362396772ad50ec3bfb728d332eb1c30-3200x2125.jpg?w=1600&h=1063&fit=crop',
     title: 'Colombia',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam.',
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit.pore aliquid deleniti aut veniam.',
   },
 ];
-  console.log(images);
-  let imageElements = ``;
-  
+ let imageElements = ``;//ricordarsi che questa è semplicemente una stringa
 // e quindi una volta montata con il ciclo for posso metterla sia dentro a gallery che a thumbnails!!
-for(let i = 0; i <images.length;i++){
-    const imageArray = images[i]
-    imageElements += `<img src="${imageArray.url}"/><div class="text-section">${imageArray.title}</div>`; 
- }
+
  gallery.innerHTML = imageElements;
- 
   //anche qui voglio vedere tutte le immagini e altezza e larghezza sono gestite internamente nel css
+thumbnails.innerHTML = imageElements;
 // prendo tutte le immagini grazie al querySelectorAll
 const picture = document.querySelectorAll(`#carousel img`); //mi restituisce una lista di nodi
-
+//ovviamente devo prendere anche tutte le immagini all interno di thumbnails
+const singleThumb = document.querySelectorAll(`#thumbnails img`);
 // creo l indice d appoggio 
 let allIndeximages = 0; 
 // metto la classe active alla prima immagine in modo da vedere solo quella
 picture[allIndeximages].classList.add(`active`);
+//metto la classe active anche alla prima immagine del thumbnails e quindi sara:
+singleThumb[allIndeximages].classList.add(`active`);
 
 // creo le due variabili bottoni al quale leghero il cambio delle immagini e al quale devo mettere il controllo affinche ripartano
 // dall inizio quando arrivano all ultima immagine
@@ -67,25 +67,22 @@ beforeButton = document.getElementById(`leftarrow`);
 nextButton.addEventListener(`click`, function(){
     
     picture[allIndeximages].classList.remove(`active`);
-   
-    
+    singleThumb[allIndeximages].classList.remove(`active`);
     allIndeximages++ ;
     if(allIndeximages===images.length){
         allIndeximages = 0;
     }
-    picture[allIndeximages].classList.add(`active`);
-    
-  
+    image[allIndeximages].classList.add(`active`);
+    singleThumb[allIndeximages].classList.add(`active`);
 })
 beforeButton.addEventListener(`click`, function(){
-    picture[allIndeximages].classList.remove(`active`);
-   
-   
+    images[allIndeximages].classList.remove(`active`);
+    singleThumb[allIndeximages].classList.remove(`active`);
     allIndeximages-- ;
     if(allIndeximages < 0){
         allIndeximages = (images.length - 1);
     }
-    picture[allIndeximages].classList.add(`active`);
+    images[allIndeximages].classList.add(`active`);
+    singleThumb[allIndeximages].classList.add(`active`);
 })
 
-  
